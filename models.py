@@ -10,8 +10,18 @@ mydb = mysql.connector.connect(
 
 
 def POST_ENTRADA(data):
-    # if not data.descricao:
-    #     return False
+
+    def ValidateParams(data):
+        print(not data["descricao"])
+        if not data["descricao"]:
+            return "Descrição Invalida"
+
+        return True
+
+    validate = ValidateParams(data)
+    if validate != True:
+        return validate
+ 
     mycursor = mydb.cursor()
 
     sql = "INSERT INTO ENTRADAS (DESCRICAO, VALOR, DATA) values (%s, %s, %s)"
@@ -22,7 +32,27 @@ def POST_ENTRADA(data):
 
     mydb.commit()
     print(mycursor.rowcount, "record inserted.")
+    return True
 
 
+def GET_ENTRADAS():
+    sql = "SELECT ID, DESCRICAO, VALOR, DATA FROM ENTRADAS"
+    mycursor = mydb.cursor()
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
 
+
+    retorno = []
+    for entrada in myresult:
+        ID = entrada[0]
+        DESCRICAO = entrada[1]
+        VALOR = entrada[2]
+        DATA = entrada[3]
+
+        print(entrada)
+        obj = dict(descricao = DESCRICAO)
+        retorno.append(obj)
+
+    return retorno
+    
 

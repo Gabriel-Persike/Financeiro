@@ -13,6 +13,14 @@
 		{{navbar("Entradas")}}
 
         <main>
+
+			{% if errorMessage %}
+
+            <div class="p-5 mb-4 bg-danger rounded-3" id="errorMessage">
+				{{errorMessage}}
+			</div>
+			{% endif %}
+
             <div class="p-5 mb-4 bg-primary rounded-3" id="novaEntrada">
                 <h1>Nova Entrada</h1>
                 <form action="/entradas" method="post">
@@ -34,6 +42,15 @@
                     </div>
                 </form>
             </div>
+
+
+			<div id="entradas">
+				<ul>
+					{% for item in entradas %}
+						<li>{{ item.descricao }}</li>
+					{% endfor %}
+				</ul>
+			</div>
         </main>
     </body>
 </html>
