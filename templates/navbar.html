@@ -1,0 +1,15 @@
+{% macro navbar(active)%}
+
+<header class="bg-secondary rounded-3 p-3">
+    <h1 style="color:white;"> {{active}} </h1>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link {% if active == "Home" %}active{% endif %}" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if active == "Entradas" %}active{% endif %}" href="/entradas">Entradas</a>
+      </li>
+    </ul>
+</header>
+
+{% endmacro %}
